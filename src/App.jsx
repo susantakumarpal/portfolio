@@ -163,6 +163,8 @@ function Terminal() {
 }
 
 function App() {
+  const [navOpen, setNavOpen] = useState(false);
+
   function handleContactSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -183,13 +185,28 @@ function App() {
       <div className="site-container">
         <header>
           <nav aria-label="Main navigation">
-            <a href="#about" className="logo"><span>&lt;/&gt;</span> Susanta.Kumar<span className="logo-badge">Fresher</span></a>
-            <ul className="nav-links">
-              <li><a href="#about">About</a></li>
-              <li><a href="#capabilities">Skills</a></li>
-              <li><a href="#projects">Projects</a></li>
-              <li><a href="#background">Background</a></li>
-              <li><a href="#contact">Contact</a></li>
+            <a href="#about" className="logo" onClick={() => setNavOpen(false)}><span>&lt;/&gt;</span> Susanta.Kumar<span className="logo-badge">Fresher</span></a>
+            <button
+              className="nav-toggle"
+              type="button"
+              aria-controls="primary-navigation"
+              aria-expanded={navOpen}
+              aria-label={navOpen ? 'Close navigation' : 'Open navigation'}
+              onClick={() => setNavOpen((open) => !open)}
+            >
+              <span className="nav-toggle-icon" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
+              <span>Menu</span>
+            </button>
+            <ul id="primary-navigation" className={`nav-links${navOpen ? ' is-open' : ''}`}>
+              <li><a href="#about" onClick={() => setNavOpen(false)}>About</a></li>
+              <li><a href="#capabilities" onClick={() => setNavOpen(false)}>Skills</a></li>
+              <li><a href="#projects" onClick={() => setNavOpen(false)}>Projects</a></li>
+              <li><a href="#background" onClick={() => setNavOpen(false)}>Background</a></li>
+              <li><a href="#contact" onClick={() => setNavOpen(false)}>Contact</a></li>
             </ul>
           </nav>
         </header>
